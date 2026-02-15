@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+@theme{
+    --color-bg-purple-primary: #8C1BFC;
+    
+}

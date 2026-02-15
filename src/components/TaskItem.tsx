@@ -51,11 +51,11 @@ const TaskItem = ({id, titulo, status, prioridade, dataCriacao}: TaskItemProps) 
         <p className='group-hover:text-purple-800 transition-all delay-75'>{titulo}</p>
 
         <div className='flex gap-5'>
-          <div className={`flex p-2 rounded-lg ${chooseColorStatus(status)}`}>{status}</div>
-          <div className={`flex p-2  rounded-lg ${chooseColorPrioridade(prioridade)}`}>Prioridade: {prioridade}</div>
+          <div className={`flex items-center justify-center p-2  rounded-lg ${chooseColorStatus(status)}`}>{status}</div>
+          <div className={`flex items-center justify-center p-2  rounded-lg ${chooseColorPrioridade(prioridade)}`}>Prioridade: {prioridade}</div>
         </div>
 
-        <div className='flex items-center gap-2 justify-around p-2 bg-gray-100 border border-gray-200 w-30 rounded-xl'>
+        <div className='flex items-center gap-2 justify-around p-2 bg-gray-100 border border-gray-200 w-33 rounded-xl'>
           <i className="fa-regular fa-clock text-gray-500"></i>
           <p className='text-gray-700'>{formatDateBR(dataCriacao)}</p>
         </div>

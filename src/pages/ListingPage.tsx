@@ -1,4 +1,3 @@
-import React from 'react'
 import StatCard from '../ui/StatCard'
 import TaskList from '../components/TaskList'
 

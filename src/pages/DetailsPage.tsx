@@ -1,4 +1,3 @@
-import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useTasks } from '../hooks/useTasks'
 import { formatDateBR } from '../utils/formatDateBr'

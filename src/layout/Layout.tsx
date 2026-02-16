@@ -18,7 +18,7 @@ const Layout = () => {
           </div>
 
           <button className='hover:bg-gray-100 hover:transition-all hover:ease-in-out hover:delay-75 p-2 rounded-lg cursor-pointer' onClick={()=> setMenuOpen(!menuOpen)}>
-            <i className="fa-solid fa-bars text-lg text-bg-purple-primary"></i>
+            <i className="fa-solid fa-bars text-xl text-bg-purple-primary"></i>
           </button>
 
         </div>

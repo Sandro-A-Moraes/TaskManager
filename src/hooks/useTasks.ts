@@ -1,5 +1,5 @@
 import {useEffect, useState } from "react";
-import type { Task } from "../types/tasks";
+import type { Status, Task } from "../types/tasks";
 import { api } from "../services/api";
 
 
@@ -49,6 +49,24 @@ export const useTasks = ()=>{
         return tasksList.find(task => task.id === id)
 
     }
+
+    async function changeStatus(id: string, newStatus: Status){
+        
+        const previousTasks = tasksList
+
+        setTasksList(
+            prev => prev.map(task => task.id === id ? 
+                {...task, status: newStatus} : task))
+
+        try {
+            await api.put<Task>(`/tasks/${id}`, {status: newStatus})
+
+
+        } catch (error) {
+            setTasksList(previousTasks)
+            console.error(error)
+        }
+    }
     
-    return {tasksList, addTask, getTaskById, loading}
+    return {tasksList, addTask, getTaskById, loading, changeStatus}
 }

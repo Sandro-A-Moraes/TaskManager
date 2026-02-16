@@ -50,7 +50,7 @@ const getStatusClasses = (current: Status, button: Status) => {
 const DetailsPage = () => {
 
   const { id } = useParams<{ id: string }>()
-  const {getTaskById, loading} = useTasks()
+  const {getTaskById, loading, changeStatus} = useTasks()
   const navigate = useNavigate()
 
   if (!id) {
@@ -130,7 +130,7 @@ const DetailsPage = () => {
             <div className='flex justify-around gap-3'>
 
               {/* Pendente */}
-              <button className={getStatusClasses(task.status, 'pendente')}>
+              <button className={getStatusClasses(task.status, 'pendente')} onClick={()=>changeStatus(id, 'pendente')}>
 
                 <div className={`flex flex-col gap-2 items-center justify-center ${task.status === 'pendente' ? statusStyles.pendente.icon : 'text-gray-400'}`}>
                   <i className="fa-regular fa-clock text-xl "></i>
@@ -140,7 +140,7 @@ const DetailsPage = () => {
               </button>
               
               {/* Progresso */}
-              <button className={getStatusClasses(task.status, 'progresso')}>
+              <button className={getStatusClasses(task.status, 'progresso')} onClick={()=>changeStatus(id, 'progresso')}>
 
                 <div className={`flex flex-col gap-2 items-center justify-center ${task.status === 'progresso' ? statusStyles.progresso.icon : 'text-gray-400'}`}>
 
@@ -152,7 +152,7 @@ const DetailsPage = () => {
               </button>
 
               {/* Concluída */}
-              <button className={getStatusClasses(task.status, 'concluida')}>
+              <button className={getStatusClasses(task.status, 'concluida')} onClick={()=>changeStatus(id, 'concluida')}>
 
                 <div className={`flex flex-col gap-2 items-center justify-center ${task.status === 'concluida' ? statusStyles.concluida.icon : 'text-gray-400'}`}>
 

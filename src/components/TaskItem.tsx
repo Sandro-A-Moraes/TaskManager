@@ -51,7 +51,9 @@ const TaskItem = ({id, titulo, status, prioridade, dataCriacao}: TaskItemProps) 
         <p className='group-hover:text-purple-800 transition-all delay-75'>{titulo}</p>
 
         <div className='flex gap-5'>
+
           <div className={`flex items-center justify-center p-2  rounded-lg ${chooseColorStatus(status)}`}>{status}</div>
+          
           <div className={`flex items-center justify-center p-2  rounded-lg ${chooseColorPrioridade(prioridade)}`}>Prioridade: {prioridade}</div>
         </div>
 

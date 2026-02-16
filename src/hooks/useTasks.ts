@@ -31,10 +31,14 @@ export const useTasks = ()=>{
 
 
     async function addTask(task: Omit<Task, "id" | "dataCriacao">){
-        
+        const payload = {
+            ...task,
+            dataCriacao: new Date().toISOString(),
+        }
+
         try {
-            const response = await api.post<Task>('/tasks', task)
-            
+            const response = await api.post<Task>('/tasks', payload)
+
             setTasksList(prev => [...prev, response.data])
 
             console.log(response.status + " " + response.statusText)

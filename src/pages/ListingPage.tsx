@@ -1,9 +1,9 @@
 import StatCard from '../ui/StatCard'
 import TaskList from '../components/TaskList'
-import { useTasks } from '../hooks/useTasks'
+import { useTasksContext } from '../contexts/TaskContext'
 
 const ListingPage = () => {
-  const {tasksList} = useTasks()
+  const {tasksList} = useTasksContext()
   const total = tasksList.length
   const pendentes = tasksList.filter(task => task.status === 'pendente').length
   const progresso = tasksList.filter(task => task.status === 'progresso').length

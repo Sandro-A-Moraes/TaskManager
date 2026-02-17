@@ -1,21 +1,25 @@
-import {useState} from 'react'
-import type { SubmitEvent } from 'react'
-import { useTasks } from '../hooks/useTasks'
+import { useReducer, type ChangeEvent, type SubmitEvent} from 'react'
 import type { Status, Priority } from '../types/tasks'
 import {  useNavigate } from 'react-router-dom'
+import { useTasksContext } from '../contexts/TaskContext'
+import { formReducer, initialState } from '../reducers/TaskFormReducer'
 
 const TaskForm = () => {
-    const {addTask} = useTasks()
+    const {addTask} = useTasksContext()
     const navigate = useNavigate()
 
-    const [title, setTitle] = useState<string>('')
-    const [descricao, setDescricao] = useState<string>('')
-    const [status, setStatus] = useState<Status>('pendente')
-    const [prioridade, setPrioridade] = useState<Priority>('baixa')
+    const [state, dispatch] = useReducer(formReducer, initialState)
+    const { title, descricao, status, prioridade } = state
 
-    const handleStatusChange = (value: Status)=> setStatus(value)
+    const handleStatusChange = (value: Status) => dispatch({ field: 'status', value })
 
-    const handleSubmit = (e: SubmitEvent)=>{
+    const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => dispatch({ field: 'title', value: e.target.value })
+    
+    const handleDescricaoChange = (e: ChangeEvent<HTMLTextAreaElement>) => dispatch({ field: 'descricao', value: e.target.value })
+
+    const handlePrioridadeChange = (value: Priority) => dispatch({ field: 'prioridade', value })
+
+    const handleSubmit = (e: SubmitEvent) => {
         e.preventDefault()
         
         if (!title.trim() || !descricao.trim()) {
@@ -33,10 +37,10 @@ const TaskForm = () => {
 
         console.log('Task added:', { title, descricao, status, prioridade })
 
-        setTitle('')
-        setDescricao('')
-        setStatus('pendente')
-        setPrioridade('baixa')
+        dispatch({ field: 'title', value: '' })
+        dispatch({ field: 'descricao', value: '' })
+        dispatch({ field: 'status', value: 'pendente' })
+        dispatch({ field: 'prioridade', value: 'baixa' })
 
         navigate('/')
     }
@@ -62,7 +66,7 @@ const TaskForm = () => {
                         <i className="fa-regular fa-file-lines text-bg-purple-primary"></i>
                         <p>Título *</p>
                     </div>
-                    <input type="text" className='w-full border my-3 border-gray-200 p-3 rounded-xl' placeholder='Ex: Revisar documentação do projeto' value={title} onChange={(e)=>setTitle(e.target.value)}/>
+                    <input type="text" className='w-full border my-3 border-gray-200 p-3 rounded-xl' placeholder='Ex: Revisar documentação do projeto' value={title} onChange={handleTitleChange}/>
                 </div>
 
                 <div >
@@ -70,7 +74,7 @@ const TaskForm = () => {
                         <i className="fa-solid fa-align-left text-bg-purple-primary"></i>
                         <p>Descrição *</p>
                     </div>
-                    <textarea className='w-full border my-3 min-h-30 resize-none border-gray-200 p-3 rounded-xl' placeholder='Ex: Revisar documentação do projeto' value={descricao} onChange={(e)=> setDescricao(e.target.value)}/>
+                    <textarea className='w-full border my-3 min-h-30 resize-none border-gray-200 p-3 rounded-xl' placeholder='Ex: Revisar documentação do projeto' value={descricao} onChange={handleDescricaoChange}/>
                 </div>
 
                 <div >
@@ -90,7 +94,7 @@ const TaskForm = () => {
                         <i className="fa-solid fa-wave-square text-bg-purple-primary"></i>
                         <p>Prioridade</p>
                     </div>
-                    <select className='w-full border cursor-pointer my-3 appearance-none resize-none border-gray-200 p-3 rounded-xl' value={prioridade} onChange={(e)=> setPrioridade(e.target.value as Priority)}>
+                    <select className='w-full border cursor-pointer my-3 appearance-none resize-none border-gray-200 p-3 rounded-xl' value={prioridade} onChange={(e)=> handlePrioridadeChange(e.target.value as Priority)}>
                         <option value="baixa">🟢 Baixa</option>
                         <option value="media">🟡 Média</option>
                         <option value="alta">🔴 Alta</option>

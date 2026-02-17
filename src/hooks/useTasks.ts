@@ -9,7 +9,7 @@ export const useTasks = ()=>{
 
     useEffect(()=>{
 
-          async function  getAllTasks() {
+          async function getAllTasks() {
                 setLoading(true)
             try {
                 const response = await api.get<Task[]>('/tasks')
@@ -54,7 +54,7 @@ export const useTasks = ()=>{
 
     }
 
-    async function changeStatus(id: string, newStatus: Status){
+    async function changeStatus(id: string, newStatus: Status): Promise<void>{
         
         const previousTasks = tasksList
 

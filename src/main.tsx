@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
 import {router} from './routes/routes'
 import './index.css'
-import { TaskProvider } from './contexts/TaskProvider'
+import { TaskProvider } from './modules/tasks/context/TaskProvider'
 
 
 createRoot(document.getElementById('root')!).render(

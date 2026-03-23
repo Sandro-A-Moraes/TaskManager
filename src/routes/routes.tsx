@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
-import ListingPage from "../pages/ListingPage";
-import DetailsPage from "../pages/DetailsPage";
-import CreationPage from "../pages/CreationPage";
+import ListingPage from "../modules/tasks/pages/ListingPage";
+import DetailsPage from "../modules/tasks/pages/DetailsPage";
+import CreationPage from "../modules/tasks/pages/CreationPage";
 import NotFound from "../pages/NotFound";
 import Layout from "../layout/Layout";
 

@@ -71,6 +71,19 @@ export const useTasks = ()=>{
             console.error(error)
         }
     }
+
+    async function deleteTask(id: string): Promise<void>{
+        const previousTasks = tasksList
+
+        setTasksList(prev => prev.filter(task => task.id !== id))
+
+        try {
+            await api.delete(`/tasks/${id}`)
+        } catch (error) {
+            setTasksList(previousTasks)
+            console.error(error)
+        }
+    }
     
-    return {tasksList, addTask, getTaskById, loading, changeStatus}
+    return {tasksList, addTask, getTaskById, loading, changeStatus, deleteTask}
 }

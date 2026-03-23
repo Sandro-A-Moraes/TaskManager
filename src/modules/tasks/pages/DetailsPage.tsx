@@ -88,7 +88,7 @@ const PriorityBadge = ({ prioridade }: PriorityBadgeProps) => (
 
 const DetailsPage = () => {
   const { id } = useParams<{ id?: string }>()
-  const { getTaskById, loading, changeStatus } = useTasks()
+  const { getTaskById, loading, changeStatus, deleteTask } = useTasks()
   const navigate = useNavigate()
 
   if (!id) return <p>Tarefa não encontrada</p>
@@ -159,6 +159,10 @@ const DetailsPage = () => {
             </div>
             <PriorityBadge prioridade={prioridade} />
           </div>
+
+          <button className='bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition-colors duration-200' onClick={()=> deleteTask(id).then(() => navigate('/'))}>
+            Excluir Tarefa
+          </button>
         </div>
       </div>
     </div>

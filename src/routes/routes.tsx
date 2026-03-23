@@ -6,24 +6,23 @@ import NotFound from "../pages/NotFound";
 import Layout from "../layout/Layout";
 
 export const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <Layout/>,
-        errorElement: <NotFound/>,
-        children: [
-            {
-                index: true,
-                element: <ListingPage/>
-            },
-            {
-                path: 'create',
-                element: <CreationPage/>
-            },
-            {
-                path: 'details/:id',
-                element: <DetailsPage/>
-            }
-        ]
-    }
-   
-])
+  {
+    path: "/",
+    element: <Layout />,
+    errorElement: <NotFound />,
+    children: [
+      {
+        index: true,
+        element: <ListingPage />,
+      },
+      {
+        path: "create",
+        element: <CreationPage />,
+      },
+      {
+        path: "details/:id",
+        element: <DetailsPage />,
+      },
+    ],
+  },
+]);

@@ -1,16 +1,14 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { RouterProvider } from 'react-router-dom'
-import {router} from './routes/routes'
-import './index.css'
-import { TaskProvider } from './modules/tasks/context/TaskProvider'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./routes/routes";
+import "./index.css";
+import { TaskProvider } from "./modules/tasks/context/TaskProvider";
 
-
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <TaskProvider>
-      <RouterProvider router={router}/>
-
+      <RouterProvider router={router} />
     </TaskProvider>
   </StrictMode>,
-)
+);

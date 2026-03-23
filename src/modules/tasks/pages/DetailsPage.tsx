@@ -4,7 +4,7 @@ import { useTasks } from "../hooks/useTasks";
 import TaskDetailsHeader from "../components/TaskDetailsHeader";
 import TaskPriorityBadge from "../components/TaskPriorityBadge";
 import TaskStatusSelector from "../components/TaskStatusSelector";
-import ReactModal from "react-modal";
+import DeleteSuccessToast from "../components/DeleteSuccessToast";
 
 const DetailsPage = () => {
   const { id } = useParams<{ id?: string }>();
@@ -25,10 +25,9 @@ const DetailsPage = () => {
     await deleteTask(taskId);
     setShowDeleteModal(true);
 
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
-    setShowDeleteModal(false);
-    navigate("/");
+    setTimeout(() => {
+      navigate("/");
+    }, 2000);
   };
 
   return (
@@ -101,19 +100,10 @@ const DetailsPage = () => {
         </div>
       </div>
 
-      <ReactModal
+      <DeleteSuccessToast
         isOpen={showDeleteModal}
-        contentLabel="Tarefa Excluída"
-        className="fixed inset-0 flex items-center justify-center"
-        overlayClassName="fixed inset-0 bg-black bg-opacity-50"
-      >
-        <div className="bg-white p-8 rounded-lg shadow-xl max-w-sm mx-auto">
-          <h2 className="text-xl font-semibold mb-4 text-green-600">
-            Tarefa Excluída
-          </h2>
-          <p className="text-gray-700">A tarefa foi excluída com sucesso.</p>
-        </div>
-      </ReactModal>
+        onClose={() => setShowDeleteModal(false)}
+      />
     </div>
   );
 };
